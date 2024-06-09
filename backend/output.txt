@@ -1,0 +1,5 @@
+I ran into this issue on Windows. The other answer didn't work for me.However, running this did:pip install python-dotenv Or, if you have pip3 for Python 3:pip3 install python-dotenvShareImprove this answer
+    Follow
+    edited Dec 9, 2023 at 10:24Gino Mempin28k3030 gold badges111111 silver badges154154 bronze badges            answered Jun 28, 2023 at 15:59user22145994user2214599428111 silver badge33 bronze badges I think that the issue is related to the distribute package rather than dotenv. Update pip and setuptools, install distribute separately, and then attempting to install dotenv again.Update pip and setuptools:python -m pip install --upgrade pip setuptoolsInstall distribute separately:pip install distributeRetry installing dotenv:pip install dotenvShareImprove this answer
+    Follow
+                answered May 22, 2023 at 10:14Anmol MahajanAnmol Mahajan11977 bronze badges

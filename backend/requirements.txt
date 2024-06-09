@@ -1,0 +1,8 @@
+langchain 
+fastapi
+python-dotenv
+langchain_community
+langchain_google_genai
+bs4
+faiss-cpu
+stackapi

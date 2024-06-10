@@ -18,7 +18,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        
           <ThemeProvider
             attribute="class"
             defaultTheme="system"
@@ -29,7 +28,7 @@ export default function RootLayout({
               {children}
             </QueryProvider>
           </ThemeProvider>
-        
+
       </body>
     </html>
   );

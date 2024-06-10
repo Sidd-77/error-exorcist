@@ -18,7 +18,7 @@ import axios from "axios";
 
 
 export default function SearchInput() {
-  const { query, reference, setQuery, setRefernce } = React.useContext(QueryContext) as QueryContextType;
+  const { query, reference, setQuery, setRefernce, conversation, setConversation } = React.useContext(QueryContext) as QueryContextType;
   const router = useRouter();
   const [queryText, setQueryText] = useState("");
   const [referenceText, setReferenceText] = useState("");
@@ -32,6 +32,7 @@ export default function SearchInput() {
     let tmpR = reference;
     tmpQ.push(queryText);
     tmpR.push(referenceText);
+    setConversation([queryText])
     setQuery(tmpQ);
     setRefernce(tmpR);
     console.log({ query, reference });
@@ -57,7 +58,7 @@ export default function SearchInput() {
             <Input
                 type="search"
                 placeholder="Enter Reference Link"
-                className="sm:w-[300px] md:w-[200px] lg:w-[300px]"
+                className="sm:w-[300px] md:w-[200px] lg:w-[300px] shadow-none focus-visible:ring-0"
                 onChange={(e) => setReferenceText(e.target.value)}
               />
             </TooltipTrigger>

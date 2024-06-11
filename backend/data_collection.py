@@ -55,7 +55,7 @@ def get_results_stackoverflow(search_query:str, reference:str):
     response = requests.request("POST", url, headers=headers, data=payload)
     tmp = response.json()['organic']
 
-    if reference is not None :
+    if reference is not "" :
         tmp.append({"title":"User-Reference", "link":reference})
 
     return tmp

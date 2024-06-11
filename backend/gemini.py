@@ -9,7 +9,7 @@ from data_processing import process_data
 chatbot = GoogleGenerativeAI(model="gemini-1.5-pro-latest")
 
 prompt = ChatPromptTemplate.from_template("""
-    Answer the following question using provided context.
+    Answer the following question using provided context and use you knowledge if context is insufficient. Don't say in the context, just answer the question in descriptive way.
     <context>
         {context}
     </context>

@@ -12,7 +12,7 @@ load_dotenv()
 chatbot = ChatOllama(model=os.getenv("LOCAL_LLAMA_MODEL"))
 
 prompt = ChatPromptTemplate.from_template("""
-    Answer the following question using provided context.
+    Answer the following question using provided context and use you knowledge if context is insufficient. Don't say in the context, just answer the question in descriptive way.
     <context>
         {context}
     </context>

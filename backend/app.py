@@ -1,7 +1,9 @@
 from typing import Union
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from gemini import get_answer
+from gemini import get_answer_gemini
+from groq_ap import get_answer_groq
+from local_llama import get_answer_local
 from pydantic import BaseModel
 
 app = FastAPI()
@@ -18,7 +20,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-class Gemini(BaseModel):
+class Query(BaseModel):
     query: str
     reference: str
 
@@ -26,12 +28,18 @@ class Gemini(BaseModel):
 def read_root():
     return {"Hello": "World"}
 
-
 @app.get("/items/{item_id}")
 def read_item(item_id: int, q: Union[str, None] = None):
     return {"item_id": item_id, "q": q}
 
-
 @app.post("/gemini")
-def get_gemini(gemini: Gemini):
-    return get_answer(gemini.query)
+def get_gemini(gemini: Query):
+    return get_answer_gemini(gemini.query)
+
+@app.post("/groq")
+def get_groq(groq: Query):
+    return get_answer_groq(groq.query)
+
+@app.post("/local")
+def get_local(local: Query):
+    return get_answer_local(local.query)

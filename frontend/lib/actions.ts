@@ -1,6 +1,7 @@
 'use server';
 import axios from "axios";
 
+
 export const getResponse = async (queryText: String, referenceText: String, model: String) => {
     let res = await axios.post(`http://127.0.0.1:8000/${model}`, {
         query: queryText,

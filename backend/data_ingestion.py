@@ -4,8 +4,6 @@ import json
 from dotenv import load_dotenv
 load_dotenv()
 from data_processing import process_data
-from langchain_community.utilities import StackExchangeAPIWrapper
-from langchain_community.document_loaders import WebBaseLoader
 import bs4
 from langchain_community.document_loaders import TextLoader
 
@@ -17,6 +15,20 @@ def load_data(url_collection):
         response = requests.get(url)
         soup = bs4.BeautifulSoup(response.text, 'html.parser')
         doc = soup.get_text()
+
+        if obj['title'] == 'User-Reference':
+            f = open("output.txt", "w")
+            f.write(doc)
+            f.close()
+            loader = TextLoader('output.txt')
+            text_document = loader.load()
+            os.remove("output.txt")
+            documents.append({
+                "title": obj['title'],
+                "content": text_document
+            })
+            continue
+
         content_div = soup.find_all(class_='answercell')
         content = ' '.join([div.get_text().replace('\n',"").replace('                    ', "\n") for div in content_div])
         f = open("output.txt", "w")
@@ -24,6 +36,7 @@ def load_data(url_collection):
         f.close()
         loader = TextLoader('output.txt')
         text_document = loader.load()
+        os.remove("output.txt")
         documents.append({
             "title": obj['title'],
             "content": text_document
@@ -33,8 +46,9 @@ def load_data(url_collection):
 
 
 if __name__ == "__main__":
-    tmp = load_data([{"link":"https://stackoverflow.com/questions/49328525/pip-install-dotenv-error-code-1-windows-10","title":"I'm not able to connect to the internet"}])
+    tmp = load_data([{"link":"https://python.langchain.com/v0.1/docs/use_cases/question_answering/local_retrieval_qa/","title":"User-Reference"}])
     print("Stage one done successfully ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n")
+    print(tmp)
     db = process_data(tmp)
     result = db.similarity_search("setuptools")
     print("Stage two done successfully ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n")

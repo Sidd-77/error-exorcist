@@ -1,5 +1,0 @@
-Try, export PATH=/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:$PATHProbably you replaced the path variable while trying to set a new path variable.Going forward, do 'echo $PATH' before adding a new path variable.ShareImprove this answer
-    Follow
-                answered Sep 13, 2017 at 12:32SienaSiena7781010 silver badges2424 bronze badges There doesn's seem to be any need to encapsulate command in quotes, without them it even works.echo 'userpassword' | /usr/bin/sudo -u 'myuser' -S screen -lsShareImprove this answer
-    Follow
-    edited Jul 14, 2016 at 23:39            answered Jul 14, 2016 at 23:33BorysekOndrejBorysekOndrej9122 silver badges44 bronze badges

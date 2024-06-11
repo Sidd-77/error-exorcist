@@ -41,7 +41,7 @@ def get_error_message_ollama(user_input):
     return chain.invoke({'user_input':user_input})
 
 
-def get_results_stackoverflow(search_query:str):
+def get_results_stackoverflow(search_query:str, reference:str):
     url = "https://google.serper.dev/search"
     payload = json.dumps({
         "q": search_query+" site:stackoverflow.com",
@@ -55,5 +55,8 @@ def get_results_stackoverflow(search_query:str):
     response = requests.request("POST", url, headers=headers, data=payload)
     tmp = response.json()['organic']
 
-    return response.json()['organic']
+    if reference is not None :
+        tmp.append({"title":"User-Reference", "link":reference})
+
+    return tmp
 

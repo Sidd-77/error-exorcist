@@ -34,16 +34,16 @@ def read_item(item_id: int, q: Union[str, None] = None):
 
 @app.post("/gemini")
 def get_gemini(gemini: Query):
-    return get_answer_gemini(gemini.query)
+    return get_answer_gemini(gemini.query, gemini.reference)
 
 @app.post("/groq/8b")
 def get_groq(groq: Query):
-    return get_answer_groq_8b(groq.query)
+    return get_answer_groq_8b(groq.query, groq.reference)
 
 @app.post("/groq/70b")
 def get_groq(groq: Query):
-    return get_answer_groq_70b(groq.query)
+    return get_answer_groq_70b(groq.query, groq.reference)
 
 @app.post("/local")
 def get_local(local: Query):
-    return get_answer_local(local.query)
+    return get_answer_local(local.query, local.reference)

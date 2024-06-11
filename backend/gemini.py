@@ -18,9 +18,9 @@ prompt = ChatPromptTemplate.from_template("""
 
 chain = create_stuff_documents_chain(chatbot, prompt)
 
-def get_answer_gemini(input):
+def get_answer_gemini(input, reference=None):
     msg = get_error_message_gemini(input)
-    urls = get_results_stackoverflow(msg)
+    urls = get_results_stackoverflow(msg, reference)
     data = load_data(urls)
     db = process_data(data)
     retriver = db.as_retriever()

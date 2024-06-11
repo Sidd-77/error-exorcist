@@ -16,11 +16,11 @@ prompt = ChatPromptTemplate.from_template("""
 """)
 
 
-def get_answer_groq_8b(input):
+def get_answer_groq_8b(input, reference=None):
     chatbot = ChatGroq(model='llama3-8b-8192')
     chain = create_stuff_documents_chain(chatbot, prompt)
     msg = get_error_message_groq(input)
-    urls = get_results_stackoverflow(msg)
+    urls = get_results_stackoverflow(msg, reference)
     data = load_data(urls)
     db = process_data(data)
     retriver = db.as_retriever()
@@ -28,11 +28,11 @@ def get_answer_groq_8b(input):
     result = retrievla_chain.invoke({"input": input})
     return result['answer']
 
-def get_answer_groq_70b(input):
+def get_answer_groq_70b(input, reference=None):
     chatbot = ChatGroq(model='llama3-70b-8192')
     chain = create_stuff_documents_chain(chatbot, prompt)
     msg = get_error_message_groq(input)
-    urls = get_results_stackoverflow(msg)
+    urls = get_results_stackoverflow(msg, reference)
     data = load_data(urls)
     db = process_data(data)
     retriver = db.as_retriever()

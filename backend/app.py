@@ -2,7 +2,7 @@ from typing import Union
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from gemini import get_answer_gemini
-from groq_ap import get_answer_groq
+from groq_ap import get_answer_groq_8b, get_answer_groq_70b
 from local_llama import get_answer_local
 from pydantic import BaseModel
 
@@ -36,9 +36,13 @@ def read_item(item_id: int, q: Union[str, None] = None):
 def get_gemini(gemini: Query):
     return get_answer_gemini(gemini.query)
 
-@app.post("/groq")
+@app.post("/groq/8b")
 def get_groq(groq: Query):
-    return get_answer_groq(groq.query)
+    return get_answer_groq_8b(groq.query)
+
+@app.post("/groq/70b")
+def get_groq(groq: Query):
+    return get_answer_groq_70b(groq.query)
 
 @app.post("/local")
 def get_local(local: Query):

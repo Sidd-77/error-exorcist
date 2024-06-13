@@ -3,7 +3,7 @@ import axios from "axios";
 
 
 export const getResponse = async (queryText: String, referenceText: String, model: String) => {
-    let url = process.env.NEXT_PUBLIC_BACKEND_URL || "http://127.0.0.1:9000/";
+    let url = process.env.NEXT_PUBLIC_BACKEND_URL || "http://0.0.0.0:8000/";
     let res = await axios.post(url+model, {
         query: queryText,
         reference: referenceText,
